@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="device">
+	<insert id="insertIosDeviceList" parameterClass="model.DeviceList">
+		insert into tb_device_list (device_key, device_type, cus_num, device_uid, tags, active, created) 
+		values(#device_token#, "IOS", #cus_num#, #device_uid#, #tag#, #active#, #created#)
+	</insert>
+	
+	<insert id="insertAndroidDeviceList" parameterClass="model.DeviceList">
+		insert into tb_device_list (device_key, device_type, cus_num, device_uid, tags, active, created) 
+		values(#apid#, "ANDROID", #cus_num#, #device_uid#, #tag#, #active#, #created#)
+	</insert>
+	
+	<delete id="deleteDeviceList">
+		delete from tb_device_list
+	</delete>
+	
+	<select id="selectDeviceList" resultClass="model.DeviceList">
+		select device_key, device_type, cus_num, device_uid, tags as tag, active, created
+		from tb_device_list
+	</select>
+	
+	<select id="countDeviceList" resultClass="int">
+		select count(*) from tb_device_list
+	</select>
+	
+	<select id="countActiveDeviceList" resultClass="int">
+		select count(*) from tb_device_list
+		where active = "true";
+	</select>
+</sqlMap> 

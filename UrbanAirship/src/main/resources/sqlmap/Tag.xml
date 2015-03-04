@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="tag">
+	<select id="selectDeviceList" parameterClass="model.Target" resultClass="model.DeviceList">
+		select 	a.device_key, a.device_type, a.cus_num, a.device_uid 
+		from	tb_device_list a, tb_target_list b
+		where	a.$join_type$ = b.$join_type$
+		and		b.cell_id = #cell_id#
+		and		a.active = "true"
+	</select>
+	
+	<select id="selectCamp" resultClass="model.Target">
+		select 	distinct cell_id, camp_name 
+		from	tb_target_list
+	</select>
+</sqlMap> 
